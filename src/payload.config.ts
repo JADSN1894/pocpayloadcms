@@ -4,9 +4,11 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { env } from './lib/env'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Laboratories } from './collections/Laboratories/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,8 +19,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    autoLogin: {
+      email: env.CMS_SEED_ADMIN_EMAIL,
+      password: env.CMS_SEED_ADMIN_PASSWORD,
+    },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Laboratories],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

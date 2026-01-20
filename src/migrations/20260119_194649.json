@@ -351,6 +351,93 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.laboratories": {
+      "name": "laboratories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "laboratory": {
+          "name": "laboratory",
+          "type": "enum_laboratories_laboratory",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'999'"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "laboratories_laboratory_idx": {
+          "name": "laboratories_laboratory_idx",
+          "columns": [
+            {
+              "expression": "laboratory",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "laboratories_updated_at_idx": {
+          "name": "laboratories_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "laboratories_created_at_idx": {
+          "name": "laboratories_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.payload_kv": {
       "name": "payload_kv",
       "schema": "",
@@ -522,6 +609,12 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
+        },
+        "laboratories_id": {
+          "name": "laboratories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
@@ -599,6 +692,21 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "payload_locked_documents_rels_laboratories_id_idx": {
+          "name": "payload_locked_documents_rels_laboratories_id_idx",
+          "columns": [
+            {
+              "expression": "laboratories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
@@ -634,6 +742,19 @@
           "tableTo": "media",
           "columnsFrom": [
             "media_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_laboratories_fk": {
+          "name": "payload_locked_documents_rels_laboratories_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "laboratories",
+          "columnsFrom": [
+            "laboratories_id"
           ],
           "columnsTo": [
             "id"
@@ -947,7 +1068,20 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.enum_laboratories_laboratory": {
+      "name": "enum_laboratories_laboratory",
+      "schema": "public",
+      "values": [
+        "212",
+        "206",
+        "210",
+        "208",
+        "204",
+        "999"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
@@ -958,6 +1092,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "f4faa277-5ce1-474c-99d0-e7d734c6983c",
+  "id": "adacad0b-1299-477e-8622-513760811183",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
