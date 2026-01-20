@@ -2,6 +2,17 @@ import type { CollectionConfig } from 'payload'
 
 export const Laboratories: CollectionConfig = {
   slug: 'laboratories',
+  admin: {
+    useAsTitle: 'laboratory',
+  },
+  defaultSort: '-id',
+  access: {
+    // Prevent all users from creating new documents
+    create: () => false,
+    read: () => true,
+    update: () => false,
+    delete: () => false,
+  },
   fields: [
     {
       name: 'laboratory',
@@ -9,30 +20,30 @@ export const Laboratories: CollectionConfig = {
       options: [
         {
           label: 'Mecanica',
-          value: '212',
+          value: 'Mecanica - 212',
         },
         {
           label: 'Fluidos Calor e Ondas',
-          value: '206',
+          value: 'Fluidos Calor e Ondas - 206',
         },
         {
           label: 'Eletricidade e Magnetismo',
-          value: '210',
+          value: 'Eletricidade e Magnetismo - 210',
         },
         {
           label: 'Fisica Moderna e Fisica Eletrônica',
-          value: '208',
+          value: 'Fisica Moderna e Fisica Eletrônica - 208',
         },
         {
           label: 'Instrumentação ao Ensino de Física',
-          value: '204',
+          value: 'Instrumentação ao Ensino de Física - 204',
         },
         {
           label: 'Desconhecido',
-          value: '999',
+          value: 'Desconhecido - 999',
         },
       ],
-      defaultValue: '999',
+      defaultValue: 'Desconhecido - 999',
       required: true,
       unique: true,
     },

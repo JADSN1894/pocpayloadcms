@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     laboratories: Laboratory;
+    experiments: Experiment;
+    'experiment-items': ExperimentItem;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     laboratories: LaboratoriesSelect<false> | LaboratoriesSelect<true>;
+    experiments: ExperimentsSelect<false> | ExperimentsSelect<true>;
+    'experiment-items': ExperimentItemsSelect<false> | ExperimentItemsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -167,7 +171,37 @@ export interface Media {
  */
 export interface Laboratory {
   id: number;
-  laboratory: '212' | '206' | '210' | '208' | '204' | '999';
+  laboratory:
+    | 'Mecanica - 212'
+    | 'Fluidos Calor e Ondas - 206'
+    | 'Eletricidade e Magnetismo - 210'
+    | 'Fisica Moderna e Fisica Eletrônica - 208'
+    | 'Instrumentação ao Ensino de Física - 204'
+    | 'Desconhecido - 999';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiments".
+ */
+export interface Experiment {
+  id: number;
+  name: string;
+  description: string;
+  laboratory: number | Laboratory;
+  'experiment-item': (number | ExperimentItem)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiment-items".
+ */
+export interface ExperimentItem {
+  id: number;
+  name: string;
+  qtde: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -206,6 +240,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'laboratories';
         value: number | Laboratory;
+      } | null)
+    | ({
+        relationTo: 'experiments';
+        value: number | Experiment;
+      } | null)
+    | ({
+        relationTo: 'experiment-items';
+        value: number | ExperimentItem;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -295,6 +337,28 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface LaboratoriesSelect<T extends boolean = true> {
   laboratory?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiments_select".
+ */
+export interface ExperimentsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  laboratory?: T;
+  'experiment-item'?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiment-items_select".
+ */
+export interface ExperimentItemsSelect<T extends boolean = true> {
+  name?: T;
+  qtde?: T;
   updatedAt?: T;
   createdAt?: T;
 }

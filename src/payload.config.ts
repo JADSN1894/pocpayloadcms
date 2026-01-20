@@ -1,5 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -9,6 +9,8 @@ import { env } from './lib/env'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Laboratories } from './collections/Laboratories/config'
+import { Experiments } from './collections/Experiments/config'
+import { ExperimentItems } from './collections/ExperimentItems/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,8 +26,10 @@ export default buildConfig({
       password: env.CMS_SEED_ADMIN_PASSWORD,
     },
   },
-  collections: [Users, Media, Laboratories],
-  editor: lexicalEditor(),
+  collections: [Users, Media, Laboratories, Experiments, ExperimentItems],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

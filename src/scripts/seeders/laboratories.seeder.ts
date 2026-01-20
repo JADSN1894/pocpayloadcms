@@ -1,13 +1,11 @@
 import { Payload } from 'payload'
-import { env } from '@/lib/env'
-import { isDuplicateError } from './utils/is-duplicate-error'
 
 export async function seedLaboraties(payload: Payload) {
   try {
     const responseLab212 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '212',
+        laboratory: 'Mecanica - 212',
       },
     })
     console.log('Laboratory created:', responseLab212)
@@ -15,7 +13,7 @@ export async function seedLaboraties(payload: Payload) {
     const responseLab206 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '206',
+        laboratory: 'Fluidos Calor e Ondas - 206',
       },
     })
 
@@ -24,7 +22,7 @@ export async function seedLaboraties(payload: Payload) {
     const responseLab210 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '210',
+        laboratory: 'Eletricidade e Magnetismo - 210',
       },
     })
 
@@ -33,7 +31,7 @@ export async function seedLaboraties(payload: Payload) {
     const responseLab208 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '208',
+        laboratory: 'Fisica Moderna e Fisica Eletrônica - 208',
       },
     })
 
@@ -42,7 +40,7 @@ export async function seedLaboraties(payload: Payload) {
     const responseLab204 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '204',
+        laboratory: 'Instrumentação ao Ensino de Física - 204',
       },
     })
 
@@ -51,7 +49,7 @@ export async function seedLaboraties(payload: Payload) {
     const responseLab999 = await payload.create({
       collection: 'laboratories',
       data: {
-        laboratory: '999',
+        laboratory: 'Desconhecido - 999',
       },
     })
     console.log('Laboratory created:', responseLab999)
