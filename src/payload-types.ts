@@ -190,6 +190,7 @@ export interface Experiment {
   name: string;
   description: string;
   laboratory: number | Laboratory;
+  photo: number | Media;
   'experiment-item': (number | ExperimentItem)[];
   updatedAt: string;
   createdAt: string;
@@ -348,6 +349,7 @@ export interface ExperimentsSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   laboratory?: T;
+  photo?: T;
   'experiment-item'?: T;
   updatedAt?: T;
   createdAt?: T;

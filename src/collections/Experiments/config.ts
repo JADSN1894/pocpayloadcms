@@ -27,6 +27,12 @@ export const Experiments: CollectionConfig = {
       required: true,
     },
     {
+      name: 'photo',
+      type: 'upload',
+      relationTo: 'media',
+      required: true,
+    },
+    {
       name: 'experiment-item',
       type: 'relationship',
       relationTo: 'experiment-items',

@@ -134,11 +134,16 @@ export const experiments = pgTable(
   'experiments',
   {
     id: serial('id').primaryKey(),
-    name: varchar('name').notNull().default('Unknown'),
+    name: varchar('name').notNull().default('Desconhecido'),
     description: varchar('description').notNull(),
     laboratory: integer('laboratory_id')
       .notNull()
       .references(() => laboratories.id, {
+        onDelete: 'set null',
+      }),
+    photo: integer('photo_id')
+      .notNull()
+      .references(() => media.id, {
         onDelete: 'set null',
       }),
     updatedAt: timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 3 })
@@ -151,6 +156,7 @@ export const experiments = pgTable(
   (columns) => [
     uniqueIndex('experiments_name_idx').on(columns.name),
     index('experiments_laboratory_idx').on(columns.laboratory),
+    index('experiments_photo_idx').on(columns.photo),
     index('experiments_updated_at_idx').on(columns.updatedAt),
     index('experiments_created_at_idx').on(columns.createdAt),
   ],
@@ -187,7 +193,7 @@ export const experiment_items = pgTable(
   'experiment_items',
   {
     id: serial('id').primaryKey(),
-    name: varchar('name').notNull().default('Unknown'),
+    name: varchar('name').notNull().default('Desconhecido'),
     qtde: numeric('qtde', { mode: 'number' }).notNull().default(0),
     updatedAt: timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 3 })
       .defaultNow()
@@ -386,6 +392,11 @@ export const relations_experiments = relations(experiments, ({ one, many }) => (
     fields: [experiments.laboratory],
     references: [laboratories.id],
     relationName: 'laboratory',
+  }),
+  photo: one(media, {
+    fields: [experiments.photo],
+    references: [media.id],
+    relationName: 'photo',
   }),
   _rels: many(experiments_rels, {
     relationName: '_rels',
