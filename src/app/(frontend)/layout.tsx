@@ -1,5 +1,6 @@
 import React from 'react'
 import './globals.css'
+import './tweakcnshacdn.css'
 import { ThemeProvider } from 'next-themes'
 
 export const metadata = {
@@ -13,8 +14,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider>
-          <main>{children}</main>
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <main className="w-svw h-svh overflow-hidden">{children}</main>
         </ThemeProvider>
       </body>
     </html>

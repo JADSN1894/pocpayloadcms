@@ -135,7 +135,7 @@ export const experiments = pgTable(
   {
     id: serial('id').primaryKey(),
     name: varchar('name').notNull().default('Desconhecido'),
-    description: varchar('description').notNull(),
+    description: jsonb('description').notNull(),
     laboratory: integer('laboratory_id')
       .notNull()
       .references(() => laboratories.id, {

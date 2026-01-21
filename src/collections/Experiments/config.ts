@@ -16,7 +16,7 @@ export const Experiments: CollectionConfig = {
     },
     {
       name: 'description',
-      type: 'text',
+      type: 'richText',
       required: true,
     },
     {
@@ -33,7 +33,7 @@ export const Experiments: CollectionConfig = {
       required: true,
     },
     {
-      name: 'experiment-item',
+      name: 'experimentItems',
       type: 'relationship',
       relationTo: 'experiment-items',
       hasMany: true,

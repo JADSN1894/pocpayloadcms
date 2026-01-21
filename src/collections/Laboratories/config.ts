@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload'
 export const Laboratories: CollectionConfig = {
   slug: 'laboratories',
   admin: {
-    useAsTitle: 'laboratory',
+    useAsTitle: 'id',
   },
   defaultSort: '-id',
   access: {
