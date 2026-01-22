@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 import { Payload } from 'payload'
-import { createMediaFromImageUrl } from './utils/create-media-from-image-url'
 
 export async function seedExperimentsItems(payload: Payload) {
   for (let index = 0; index < 5; index++) {
