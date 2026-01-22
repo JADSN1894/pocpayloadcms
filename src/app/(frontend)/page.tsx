@@ -1,7 +1,5 @@
-import { getLaboratories } from '@/collections/Laboratories/fetchers'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { Suspense } from 'react'
 
 export default async function HomePage() {
   return (
