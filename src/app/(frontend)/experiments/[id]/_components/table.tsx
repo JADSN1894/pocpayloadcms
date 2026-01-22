@@ -1,15 +1,15 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
 import { ExperimentItem } from '@/payload-types'
+
 import { Fragment } from 'react/jsx-runtime'
+import { v4 } from 'uuid'
 
 export function TableExperimentItens({
   headers,
@@ -25,7 +25,7 @@ export function TableExperimentItens({
       <TableHeader>
         <TableRow>
           {headers.map((headerName) => (
-            <Fragment key={crypto.randomUUID()}>
+            <Fragment key={v4()}>
               {<TableHead className="text-center">{headerName}</TableHead>}
             </Fragment>
           ))}
@@ -33,11 +33,11 @@ export function TableExperimentItens({
       </TableHeader>
       <TableBody>
         {rows.map((row) => (
-          <TableRow key={crypto.randomUUID()}>
-            <TableCell key={crypto.randomUUID()} className="font-medium text-left">
+          <TableRow key={v4()}>
+            <TableCell key={v4()} className="font-medium text-left">
               {row.qtde}
             </TableCell>
-            <TableCell key={crypto.randomUUID()} className="font-medium text-left">
+            <TableCell key={v4()} className="font-medium text-left">
               {row.name}
             </TableCell>
           </TableRow>

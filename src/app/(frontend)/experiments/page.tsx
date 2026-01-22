@@ -1,9 +1,10 @@
 import { getExperiments } from '@/collections/Experiments/fetchers'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Suspense } from 'react'
+import { Suspense, useId } from 'react'
 import { Laboratory, Media } from '@/payload-types'
 import { ExperimentMetadata } from './_components/experiment-metadata'
+import { v4 } from 'uuid'
 
 export default async function HomePage() {
   const experiments = await getExperiments()
@@ -17,7 +18,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-3 gap-4 m-4">
           {experiments.map(({ id, name, photo, description, laboratory, experimentItems }) => (
             <Link
-              key={crypto.randomUUID()}
+              key={v4()}
               href={`/experiments/${id}`}
               aria-label={`Read article`}
               className="block"
