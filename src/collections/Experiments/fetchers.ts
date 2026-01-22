@@ -8,6 +8,7 @@ export async function getExperiments() {
     const { docs: experiments } = await payload.find({
       collection: 'experiments',
       sort: ['id'],
+      depth: 1,
       // limit: 1,
       // pagination: false,
     })
