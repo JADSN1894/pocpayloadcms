@@ -20,7 +20,7 @@ export function TableExperimentItens({
 }) {
   // headers: string[], rows: string[][]
   return (
-    <Table className="sm:w-1/2 lg:w-[96%] mb-6">
+    <Table className="sm:w-1/2 lg:w-[98%] mb-6">
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader>
         <TableRow>

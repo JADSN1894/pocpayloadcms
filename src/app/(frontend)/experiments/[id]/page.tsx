@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { ExperimentItem, Media } from '@/payload-types'
 import { TableExperimentItens } from './_components/table'
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+import BackButton from '../../_components/BackButton'
 
 export default async function ExperimentPage({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params
@@ -23,7 +26,15 @@ export default async function ExperimentPage({ params }: { params: Promise<{ id:
   const imgWidth = castPhotoMedia.width ?? 512
 
   return (
-    <div className="flex flex-col w-dvw h-dvh overflow-x-hidden gap-y-2 mt-4">
+    <div className="flex flex-col w-dvw h-dvh overflow-x-hidden gap-y-2 mt-2">
+      <div className="flex mt-2 ml-2 gap-x-2">
+        <BackButton />
+
+        <Link href="/experiments">
+          <Button>Experimentos</Button>
+        </Link>
+      </div>
+
       <div>
         <h1 className="font-bold text-center md:text-2xl lg:text-4xl">{name}</h1>
       </div>
@@ -34,7 +45,7 @@ export default async function ExperimentPage({ params }: { params: Promise<{ id:
           alt={`${name}`}
           height={imgHeight}
           width={imgWidth}
-          className="object-center mr-2 ml-2"
+          className="object-center mr-2 ml-2 mt-4 mb-4"
         />
       </div>
 
@@ -42,7 +53,7 @@ export default async function ExperimentPage({ params }: { params: Promise<{ id:
         <h2 className="text-wrap text-justify lg:w-[98%] ml-2 mr-2">{descriptionString}</h2>
       </div>
 
-      <div>
+      <div className="w-full">
         <TableExperimentItens
           headers={headersValuesArg}
           rows={castExperimentItems}
