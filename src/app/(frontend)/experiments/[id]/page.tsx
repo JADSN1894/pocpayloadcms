@@ -23,9 +23,9 @@ export default async function ExperimentPage({ params }: { params: Promise<{ id:
   const imgWidth = castPhotoMedia.width ?? 512
 
   return (
-    <div className="flex flex-col w-svw h-screen overflow-x-hidden gap-y-2 mt-4">
+    <div className="flex flex-col w-dvw h-dvh overflow-x-hidden gap-y-2 mt-4">
       <div>
-        <h1 className="font-bold text-center lg:text-2xl">{name}</h1>
+        <h1 className="font-bold text-center md:text-2xl lg:text-4xl">{name}</h1>
       </div>
 
       <div className="flex justify-center content-center">
