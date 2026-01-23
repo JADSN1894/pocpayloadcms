@@ -1,5 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { en } from '@payloadcms/translations/languages/en'
+import { pt } from '@payloadcms/translations/languages/pt'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -25,6 +27,10 @@ export default buildConfig({
       email: env.CMS_SEED_ADMIN_EMAIL,
       password: env.CMS_SEED_ADMIN_PASSWORD,
     },
+  },
+  i18n: {
+    supportedLanguages: { en, pt },
+    fallbackLanguage: 'pt',
   },
   collections: [Users, Media, Laboratories, Experiments, ExperimentItems],
   editor: lexicalEditor({

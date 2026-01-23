@@ -2,8 +2,18 @@ import type { CollectionConfig } from 'payload'
 
 export const Laboratories: CollectionConfig = {
   slug: 'laboratories',
+  labels: {
+    singular: {
+      en: 'Laboratory',
+      pt: 'Laboratório',
+    },
+    plural: {
+      en: 'Laboratories',
+      pt: 'Laboratórios',
+    },
+  },
   admin: {
-    useAsTitle: 'id',
+    useAsTitle: 'laboratory',
   },
   defaultSort: '-id',
   access: {
@@ -16,6 +26,10 @@ export const Laboratories: CollectionConfig = {
   fields: [
     {
       name: 'laboratory',
+      label: {
+        en: 'Laboratory',
+        pt: 'Laboratório',
+      },
       type: 'select',
       options: [
         {
