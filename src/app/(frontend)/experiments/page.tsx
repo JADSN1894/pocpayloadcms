@@ -14,7 +14,7 @@ export default async function HomePage() {
   return (
     <div className="bg-background h-svh w-svw overflow-y-auto overflow-x-hidden">
       <Suspense fallback={<div>Loading...</div>}>
-        <div className="grid grid-cols-3 gap-4 m-4">
+        <div className="grid gap-4 m-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {experiments.map(({ id, name, photo, description, laboratory }) => {
             const descriptionString = convertLexicalToPlaintext({ data: description })
             const castPhotoMedia = photo as Media

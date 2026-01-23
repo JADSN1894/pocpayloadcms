@@ -20,7 +20,7 @@ export function TableExperimentItens({
 }) {
   // headers: string[], rows: string[][]
   return (
-    <Table>
+    <Table className="sm:w-1/2 lg:w-[96%]">
       {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
       <TableHeader>
         <TableRow>
@@ -34,10 +34,10 @@ export function TableExperimentItens({
       <TableBody>
         {rows.map((row) => (
           <TableRow key={v4()}>
-            <TableCell key={v4()} className="font-medium text-left">
+            <TableCell key={v4()} className="font-medium text-center sm:text-ellipsis">
               {row.qtde}
             </TableCell>
-            <TableCell key={v4()} className="font-medium text-left">
+            <TableCell key={v4()} className="font-medium text-left text-wrap sm:text-ellipsis">
               {row.name}
             </TableCell>
           </TableRow>

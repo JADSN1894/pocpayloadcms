@@ -19,20 +19,23 @@ export function ExperimentCard({
   className?: string
 }) {
   const { id, name, description, photo, laboratory } = data
+
+  const castPhotoMedia = photo as Media
+
   return (
     <Link key={v4()} href={`/experiments/${id}`} aria-label={`Read article`} className="block">
-      <article className="rounded-md border border-gray-700 overflow-hidden h-full flex flex-col">
+      <article className="rounded-md border border-gray-700 overflow-hidden w-full h-full flex flex-col sm:mr-4">
         {/* cover image */}
         <Image
           src={(photo as Media).url ?? ''}
-          alt={`Cover image`}
-          width={256}
-          height={256}
-          className="h-50 object-cover object-center w-full"
+          alt={`${name}`}
+          height={castPhotoMedia.height ?? 512}
+          width={castPhotoMedia.width ?? 512}
+          className={`sm:h-20 md:h-50 lg:h-80 object-contain object-center w-full mt-2`}
         />
 
         {/* content */}
-        <div className="p-3 flex-1 flex flex-col gap-5">
+        <div className="p-3 flex-1 flex flex-col gap-4">
           <header>
             {/* title */}
             <h2 className="font-bold text-lg">{name}</h2>

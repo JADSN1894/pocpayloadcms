@@ -1,12 +1,8 @@
 import { getExperimentById } from '@/collections/Experiments/fetchers'
-import { getLaboratories } from '@/collections/Laboratories/fetchers'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Suspense } from 'react'
 import { ExperimentItem, Media } from '@/payload-types'
 import { TableExperimentItens } from './_components/table'
-import { RichText } from '@/lib/payload/components/rich-text'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
 
 export default async function ExperimentPage({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params
@@ -16,30 +12,40 @@ export default async function ExperimentPage({ params }: { params: Promise<{ id:
     return <p>No experiments found</p>
   }
 
-  const experiment = experiments[0]
+  const { name, photo, description, experimentItems } = experiments[0]
 
-  let headersValuesArg = ['qtde', 'description']
+  const headersValuesArg = ['QUANTIDADE', 'DESCRIÇÃO']
+  const castExperimentItems = experimentItems as ExperimentItem[]
+  const castPhotoMedia = photo as Media
 
-  const experimentItems = experiment.experimentItems as ExperimentItem[]
+  const descriptionString = convertLexicalToPlaintext({ data: description })
+  const imgHeight = castPhotoMedia.height ?? 512
+  const imgWidth = castPhotoMedia.width ?? 512
 
   return (
-    <div className="flex justify-center w-svw h-svh overflow-x-hidden overflow-y-auto mt-4">
-      <div className="prose lg:prose-lg dark:prose-invert">
-        <h1>{experiment.name}</h1>
+    <div className="flex flex-col w-svw h-screen overflow-x-hidden gap-y-2 mt-4">
+      <div>
+        <h1 className="font-bold text-center lg:text-2xl">{name}</h1>
+      </div>
 
+      <div className="flex justify-center content-center">
         <Image
-          src={(experiment.photo as Media).url ?? ''}
-          alt={`Cover image`}
-          width={256}
-          height={256}
-          className="h-50 object-cover object-center w-full"
+          src={castPhotoMedia.url ?? ''}
+          alt={`${name}`}
+          height={imgHeight}
+          width={imgWidth}
+          className="object-center mr-2 ml-2"
         />
+      </div>
 
-        <RichText lexicalData={experiment.description} />
+      <div>
+        <h2 className="text-wrap text-justify lg:w-[98%] ml-2 mr-2">{descriptionString}</h2>
+      </div>
 
+      <div>
         <TableExperimentItens
           headers={headersValuesArg}
-          rows={experimentItems}
+          rows={castExperimentItems}
         ></TableExperimentItens>
       </div>
     </div>
